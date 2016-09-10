@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">后台</a>
+                    </li>
+                    <li>
+                        <a href="#">关于</a>
+                    </li>
+                </ul>
+                <div class="jumbotron">
+                    <h1>
+                        老王的留言板
+                    </h1>
+                    <p>
+                        一段说明性文字。。。
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-large" href="#addMsgForm">单击留言</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;
+            </button>
+                恭喜恭喜，你的留言已提交！
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <div style="height:140px;width:140px;margin-top:20px;float:left">
+                            <img alt="140x140" src="photo/touxiang.jpg" class="img-thumbnail" />
+                        </div>
+                        <div style="float:left;margin:20px">
+                            <h4>用户名：王老吉</h4>
+                            <h5>联系邮箱：fuck@fuck.com</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 column">
+                        <h2>
+                            于xxxx写下：
+                        </h2>
+                        <p>
+                            黑客是一个中文词语，皆源自英文hacker，随着灰鸽子的出现，灰鸽子成为了很多假借黑客名义控制他人电脑的黑客技术，于是出现了“骇客”与"黑客"分家。2012年电影频道节目中心出品的电影《骇客（Hacker) 》也已经开始使用骇客一词，显示出中文使用习惯的趋同。实际上，黑客（或骇客）与英文原文Hacker、Cracker等含义不能够达到完全对译，这是中英文语言词汇各自发展中形成的差异。Hacker一词，最初曾指热心于计算机技术、水平高超的电脑专家，尤其是程序设计人员，逐渐区分为白帽、灰帽、黑帽等，其中黑帽（black
+                            hat）实际就是cracker。在媒体报道中，黑客一词常指那些软件骇客（software cracker），而与黑客（黑帽子）相对的则是白帽子。
+                        </p>
+                        <p>
+                            <a style="float:right" class="btn" href="#">查看详情 »</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <form role="form" id="addMsgForm">
+                    <div class="form-group">
+                        <label for="name">用户：</label>
+                        <input type="text" class="form-control" placeholder="请输入你的名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">联系邮箱：</label>
+                        <input type="text" class="form-control" placeholder="请输入你的联系邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言内容:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">提交留言！</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <blockquote>
+                    <p>
+                        PowerBy:onice
+                    </p> <small>在温室中想象南极。</cite></small>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
