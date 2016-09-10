@@ -4,14 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>留言板</title>
-    <script src="js/jquery-3.1.0.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/messages_zh.min.js"></script>
     <style>
         body {
             margin-top: 20px;
         }
     </style>
+    <script>
+        $().ready(function(){
+            $("addMsgForm").validate();
+        });
+    </script>
 </head>
 
 <body>
@@ -43,10 +50,8 @@
             </div>
         </div>
         <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert"
-                aria-hidden="true">&times;
-            </button>
-                恭喜恭喜，你的留言已提交！
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+            </button> 恭喜恭喜，你的留言已提交！
         </div>
         <div class="row clearfix">
             <div class="col-md-12 column">
@@ -80,15 +85,15 @@
                 <form role="form" id="addMsgForm">
                     <div class="form-group">
                         <label for="name">用户：</label>
-                        <input type="text" class="form-control" placeholder="请输入你的名称">
+                        <input type="text" name="username" required maxlength="8" class="form-control" placeholder="请输入你的名称">
                     </div>
                     <div class="form-group">
                         <label for="name">联系邮箱：</label>
-                        <input type="text" class="form-control" placeholder="请输入你的联系邮箱">
+                        <input type="email" name="email" required class="form-control" placeholder="请输入你的联系邮箱">
                     </div>
                     <div class="form-group">
                         <label for="message">留言内容:</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <textarea class="form-control" name="content" required rows="5" id="comment"></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">提交留言！</button>
                 </form>
