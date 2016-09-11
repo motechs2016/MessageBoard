@@ -1,0 +1,27 @@
+body {
+    margin-top: 20px;
+}
+        
+#pager {
+    text-align: center;
+}
+
+#authCodeLabel{
+    float:left;
+    margin-top:5px;
+}
+#authCode{
+    width:200px;
+    float:left;
+}
+#authCodeImg{
+    width:100px;
+    margin-top:5px;
+    margin-left:10px;
+    float:left
+}
+#sbtn{
+    float: left;
+    clear: both;
+    margin-top: 15px;
+}

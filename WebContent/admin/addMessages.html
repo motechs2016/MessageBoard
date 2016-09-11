@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>商品信息修改</title>
+    <title>添加留言</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/jquery-3.1.0.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -20,11 +20,16 @@
             text-align: center;
         }
     </style>
+    <script>
+        $().ready(function(){
+            $("#addForm").validate();
+        });
+    </script>
 </head>
 
 <body>
     <div id="container">
-        <h2>留言修改</h2>
+        <h2>添加留言</h2>
         <hr>
         <!--提示警告-->
         <div class="alert alert-info alert-dismissable">
@@ -34,9 +39,9 @@
             </button>
             你当前的身份是管理员，因此你添加的内容在首页中将以红色醒目的字体显示。
         </div>
-        <form class="form-horizontal" role="form" method="POST" action="">
+        <form class="form-horizontal" id="addForm" role="form" method="POST" action="">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="email">用户编号:</label>
+                <label class="control-label col-sm-2" for="email">留言编号:</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">自动</p>
                 </div>
