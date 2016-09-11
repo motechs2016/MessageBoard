@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<!-- 数据源配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+
+		<property name="url"
+			value="jdbc:mysql://192.168.1.2:3306/messageboard?useUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="username" value="hitr"></property>
+		<property name="password" value="hitr"></property>
+	</bean>
+	<!-- 数据持久层会话工厂配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/hack4b/model/Message.hbm.xml</value>
+				<value>com/hack4b/model/Settings.hbm.xml</value>
+				<value>com/hack4b/model/User.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 数据持久层事物配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
