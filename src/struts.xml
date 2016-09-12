@@ -18,7 +18,7 @@
 	<!-- 用户 -->
 	<package name="user" extends="struts-default" namespace="/admin">
 		<action name="login" class="userAction" method="login">
-			<result name="success">index.jsp</result>
+			<result name="success">../index.jsp</result>
 			<result name="error">login.jsp</result>
 		</action>
 	</package>

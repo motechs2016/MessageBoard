@@ -26,14 +26,18 @@
         }
         
         #authPic {
-            margin-top: 5px;
-            width: 100px;
+        	margin-left:20px;
+           	height:32px;
+   		    width:100px;
             float: left;
         }
     </style>
     <script>
         $().ready(function(){
             $("#loginForm").validate();
+            $("#authPic").click(function(){
+            	$(this).attr("src","../authCode.do?timestamp="+new Date().getTime());
+            });
         });
     </script>
 </head>
@@ -63,8 +67,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">验证码:</label>
                 <div class="col-sm-10">
-                    <input type="text" name="authCode" required class="form-control" id="authCode" placeholder="在此输入下方的验证码！">
-                    <img src="" id="authPic" alt="单击刷新">
+                    <input type="text" name="authCode" required class="form-control" id="authCode" placeholder="在此输入验证码！">
+                    <img src="../authCode.do" id="authPic" alt="单击刷新">
                 </div>
             </div>
             <div class="form-group">
@@ -85,5 +89,4 @@
         </form>
     </div>
 </body>
-
 </html>

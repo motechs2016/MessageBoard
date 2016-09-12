@@ -11,6 +11,10 @@ public class User implements java.io.Serializable {
 	private String email;
 	private String password;
 	private String role;
+	private String salt;
+	
+	//附加属性值
+	private String authcode;
 
 	public User() {
 	}
@@ -61,5 +65,21 @@ public class User implements java.io.Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
 
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getAuthcode() {
+		return authcode;
+	}
+
+	public void setAuthcode(String authcode) {
+		this.authcode = authcode;
+	}
+	
 }

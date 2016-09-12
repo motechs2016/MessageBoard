@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>留言查询</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.1.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
+    <script src="../js/messages_zh.min.js"></script>
+    <style type="text/css">
+        #container {
+            height: 100%;
+            width: 1000px;
+            margin-top: 10px;
+        }
+        
+        #header {
+            position: relative;
+            left: 20px;
+            top: 10px;
+        }
+        
+        #header select {
+            width: 200px;
+            float: left;
+        }
+        
+        #header img {
+            float: left;
+            height: 40px;
+            float: left;
+        }
+        
+        #header select {
+            float: left;
+        }
+        
+        #footer {
+            text-align: center;
+        }
+        table td,table th{
+            text-align:center;
+        }
+    </style>
+    <script>
+        $().ready(function(){
+            $("#queryForm").validate();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <img src="../photo/query.png" alt="商品查询">
+            <form class="form-inline" id="queryForm" role="form" action="">
+                <div class="form-group">
+                    <select class="form-control" id="sel1">
+                    <option>按用户名查询</option>
+                    <option>按邮箱查询</option>
+                    </select>
+                </div>
+                &nbsp;-->>&nbsp;
+                <div class="form-group">
+                    <input type="text" required class="form-control" id="inputstream">
+                </div>
+                <button type="submit" class="btn btn-default">查询</button>
+            </form>
+        </div>
+        <hr>
+        <div id="content">
+            <!-- 消息提示 -->
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+            </button> 恭喜恭喜，操作成功！
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>用户名</th>
+                        <th>联系邮箱</th>
+                        <th>管理员?</th>
+                        <th>正文内容</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>admin</td>
+                        <td>admin@admin.com</td>
+                        <td>是</td>
+                        <td>测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据</td>
+                        <td><a href="modifyMessages.html">修改</a>|<a href="">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="footer">
+            <a href="">首页</a>
+            <a href="">上一页</a>
+            <a href="">下一页</a>
+            <a href="">尾页</a>
+            <br> 当前第&nbsp;1&nbsp;页, 总共&nbsp;2&nbsp;页
+        </div>
+    </div>
+</body>
+
+</html>

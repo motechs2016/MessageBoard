@@ -21,4 +21,14 @@ public class UserServiceImpl implements UserService {
 		return dao.login(username, password);
 	}
 
+	@Override
+	public String getSalt(int id) {
+		return dao.getSalt(id);
+	}
+
+	@Override
+	public String getSalt(String username) {
+		return dao.getSalt(username);
+	}
+
 }

@@ -35,4 +35,34 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public String getSalt(int id) {
+		Session session = ssf.openSession();
+		String hql = "select salt from User where id = :id";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(1);
+		query.setInteger("id", id);
+		String salt = (String) query.uniqueResult();
+		session.close();
+		if(salt!=null){
+			return salt;
+		}
+		return "";
+	}
+
+	@Override
+	public String getSalt(String username) {
+		Session session = ssf.openSession();
+		String hql = "select salt from User where username = :username";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(1);
+		query.setString("username", username);
+		String salt = (String) query.uniqueResult();
+		session.close();
+		if(salt!=null){
+			return salt;
+		}
+		return "";
+	}
+
 }

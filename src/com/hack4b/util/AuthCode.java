@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 验证码工具类(备用)
+ * 验证码工具类(备用，用于Servlet)
  * @author lejie
  *
  */
