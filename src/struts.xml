@@ -14,12 +14,22 @@
 	<constant name="struts.configuration.xml.reload" value="true"></constant>
 	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
 	<constant name="struts.devMode" value="true"></constant>
-	
-	<!-- 实例代码 -->
-	<package name="default" extends="struts-default" namespace="/">
+
+	<!-- 用户 -->
+	<package name="user" extends="struts-default" namespace="/admin">
 		<action name="login" class="userAction" method="login">
-			<result name="success">admin/index.jsp</result>
+			<result name="success">index.jsp</result>
 			<result name="error">login.jsp</result>
+		</action>
+	</package>
+	<!-- 工具 -->
+	<package name="tool" extends="struts-default" namespace="/">
+		<action name="authCode" class="toolAction" method="authCode">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">ins</param>
+				<param name="bufferSize">2048</param>
+			</result>
 		</action>
 	</package>
 </struts>
