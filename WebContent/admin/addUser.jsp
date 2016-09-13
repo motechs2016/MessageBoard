@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -31,15 +34,17 @@
     <div id="container">
         <h2>添加用户</h2>
         <hr>
-        <!--提示警告-->
+        <c:if test="${requestScope.msg!=null }">
+         <!--提示警告-->
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"
                     aria-hidden="true">
                 &times;
             </button>
-            添加成功了！在下面你还可以继续添加！
+            ${requestScope.msg }
         </div>
-        <form class="form-horizontal" id="addForm" role="form" method="POST" action="">
+        </c:if>
+        <form class="form-horizontal" id="addForm" role="form" method="POST" action="addUser.do">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">用户编号:</label>
                 <div class="col-sm-10">
@@ -49,28 +54,28 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsName">用户名:</label>
                 <div class="col-sm-10">
-                    <input type="text" required class="form-control" placeholder="在此输入用户名称">
+                    <input type="text" name="username" required class="form-control" placeholder="在此输入用户名称">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsPrice">联系邮箱:</label>
                 <div class="col-sm-10">
-                    <input type="email" required email class="form-control" placeholder="在此输入联系邮箱">
+                    <input type="email" name="email" required email class="form-control" placeholder="在此输入联系邮箱">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsPrice">用户角色:</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
-                    <option>普通管理员</option>
-                    <option>超级管理员</option>
+                    <select class="form-control" name="role">
+                    <option value="普通管理员">普通管理员</option>
+                    <option value="超级管理员">超级管理员</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsDiscount">用户密码:</label>
                 <div class="col-sm-10">
-                    <input type="password" required class="form-control" placeholder="在此输入用户密码">
+                    <input type="password" name="password" required class="form-control" placeholder="在此输入用户密码">
                 </div>
             </div>
             <div class="form-group">

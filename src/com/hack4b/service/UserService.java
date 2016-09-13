@@ -1,5 +1,7 @@
 package com.hack4b.service;
 
+import java.util.List;
+
 import com.hack4b.model.User;
 
 public interface UserService {
@@ -24,4 +26,25 @@ public interface UserService {
 	 * @return 如果查询成功，则返回salt值，否则返回空串
 	 */
 	public String getSalt(String username);
+	
+	/**
+	 * 添加用户
+	 * @param user
+	 * @return 成功返回true，失败返回false
+	 */
+	public boolean addUser(User user);
+	
+	/**
+	 * 用户信息查询
+	 * @param currentPage 起始页
+	 * @param pageSize  页面的大小（每页显示的数量）
+	 * @return
+	 */
+	public List<User> queryUser(int currentPage,int pageSize);
+	
+	/**
+	 * 获取所有的用户数量
+	 * @return
+	 */
+	public int getTotalUser();
 }

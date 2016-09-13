@@ -15,11 +15,18 @@
 	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
 	<constant name="struts.devMode" value="true"></constant>
 
-	<!-- 用户 -->
+	<!-- 用户管理 -->
 	<package name="user" extends="struts-default" namespace="/admin">
 		<action name="login" class="userAction" method="login">
-			<result name="success">../index.jsp</result>
+			<result name="success">index.jsp</result>
 			<result name="error">login.jsp</result>
+		</action>
+		<action name="logout" class="userAction" method="logout">
+			<result name="success">login.jsp</result>
+		</action>
+		<action name="addUser" class="userAction" method="addUser">
+			<result name="success">addUser.jsp</result>
+			<result name="error">addUser.jsp</result>
 		</action>
 	</package>
 	<!-- 工具 -->

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -7,62 +10,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/jquery-3.1.0.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <style type="text/css">
-        #container {
-            height: 800px;
-            width: 100%;
-        }
-        
-        #header {
-            height: 10%;
-            width: 100%;
-        }
-        
-        #header h2 {
-            position: relative;
-            top: 15px;
-            float:left;
-        }
-        #header img{
-            width:80px;
-            float:left;
-        }
-        #content_left {
-            width: 20%;
-            height: 80%;
-            float: left;
-        }
-        
-        #content_right {
-            width: 80%;
-            height: 80%;
-            float: left;
-        }
-        
-        #content_right iframe {
-            width: 100%;
-            height: 100%;
-        }
-        
-        #footer {
-            width: 100%;
-            height: 10%;
-            clear: both;
-        }
-        
-        #footer p {
-            font-size: 20px;
-            text-align: center;
-            position: relative;
-            top: 40px;
-        }
-        #systemLoginInfo{
-            position:absolute;
-            top:50px;
-            right:20px;
-            font-size:16px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -71,8 +19,8 @@
             <img src="../photo/logo.png" alt="欢迎使用留言板">
             <h2>留言板管理后台</h2>
             <div id="systemLoginInfo">
-                欢迎您：admin       &nbsp;&nbsp;
-                <a href="">退出</a>&nbsp;&nbsp;
+                欢迎您：${sessionScope.user.username }     &nbsp;&nbsp;
+                <a href="logout.do">退出</a>&nbsp;&nbsp;
                 <a href="about.html" target="iframeContent">关于</a>
             </div>
         </div>
@@ -89,7 +37,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="addUser.html" target="iframeContent">添加新用户</a></li>
+                        <li><a href="addUser.jsp" target="iframeContent">添加新用户</a></li>
                         <li><a href="queryUser.html" target="iframeContent">修改已有用户</a></li>
                     </ul>
                 </li>
