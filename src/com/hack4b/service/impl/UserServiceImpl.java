@@ -5,6 +5,9 @@ import java.util.List;
 import com.hack4b.dao.UserDao;
 import com.hack4b.model.User;
 import com.hack4b.service.UserService;
+import com.hack4b.util.MD5Util;
+import com.hack4b.util.SecurityCode;
+import com.hack4b.util.SecurityCode.SecurityCodeLevel;
 
 public class UserServiceImpl implements UserService {
 	
@@ -35,6 +38,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean addUser(User user) {
+		//用户密码加盐
+		SecurityCode scd = new SecurityCode();
+		String salt = scd.getSecurityCode(6, SecurityCodeLevel.Hard, false);  //生成salt
+		String password = MD5Util.getMd5(user.getPassword()+ salt);
+		user.setPassword(password);
+		user.setSalt(salt);
 		return dao.addUser(user);
 	}
 

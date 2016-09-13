@@ -38,8 +38,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public String login(){
 		ActionContext context = ActionContext.getContext();
 		Map<String,Object> session = context.getSession();
-		String authcodeSe = session.get("authCode").toString();
-		String authCodeIn = user.getAuthcode();
+		String authcodeSe = session.get("authCode").toString();	//获取session中的验证码	
+		String authCodeIn = user.getAuthcode();	//获取用户输入的验证码
 		if(!authCodeIn.equals(authcodeSe)){		//校检验证码
 			context.put("msg", "验证码错误！");	//向登录页发送错误消息
 			context.put("user", user);	//为方便用户登录，向登录页发送当前登录信息
@@ -77,12 +77,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 */
 	public String addUser(){
 		ActionContext context = ActionContext.getContext();
-		SecurityCode scd = new SecurityCode();
-		//用户密码加盐
-		String salt = scd.getSecurityCode(6, SecurityCodeLevel.Hard, false);
-		String password = MD5Util.getMd5(user.getPassword()+ salt);
-		user.setPassword(password);
-		user.setSalt(salt);
 		Boolean isSuccess = userService.addUser(user);
 		if(isSuccess){
 			context.put("msg", "用户添加成功！你可以继续添加。");
