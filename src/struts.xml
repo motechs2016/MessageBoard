@@ -31,7 +31,19 @@
 			<result name="success">addUser.jsp</result>
 			<result name="error">addUser.jsp</result>
 		</action>
-		<action name="queryUser" class="userAction" method="queryAllUser">
+		<action name="queryAllUser" class="userAction" method="queryAllUser">
+			<result name="success">queryUser.jsp</result>
+			<result name="error">queryUser.jsp</result>
+		</action>
+		<action name="queryUserById" class="userAction" method="queryUserById">
+			<result name="success">queryUser.jsp</result>
+			<result name="error">queryUser.jsp</result>
+		</action>
+		<action name="queryUserByName" class="userAction" method="queryUserByName">
+			<result name="success">queryUser.jsp</result>
+			<result name="error">queryUser.jsp</result>
+		</action>
+		<action name="queryUserByMail" class="userAction" method="queryUserByMail">
 			<result name="success">queryUser.jsp</result>
 			<result name="error">queryUser.jsp</result>
 		</action>

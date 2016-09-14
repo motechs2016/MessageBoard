@@ -100,4 +100,64 @@ public class UserDaoImpl implements UserDao {
 		return list.size();
 	}
 
+	@Override
+	public User queryUserById( int id) {
+		Session session = ssf.openSession();
+		String hql = "from User where id = :id";
+		Query query = session.createQuery(hql);
+		query.setInteger("id", id);
+		query.setMaxResults(1);
+		User user = (User) query.uniqueResult();
+		session.close();
+		return user;
+	}
+
+	@Override
+	public List<User> queryUserByName(int currentPage, int pageSize, String username) {
+		Session session = ssf.openSession();
+		String hql = "from User where username like :username";
+		Query query = session.createQuery(hql);
+		query.setString("username", "%"+username+"%");
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		List<User> list = query.list();
+		session.close();
+		return list;
+	}
+
+	@Override
+	public List<User> queryUserByMail(int currentPage, int pageSize, String mail) {
+		Session session = ssf.openSession();
+		String hql = "from User where email like :mail";
+		Query query = session.createQuery(hql);
+		query.setString("mail", "%"+mail+"%");
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		List<User> list = query.list();
+		session.close();
+		return list;
+	}
+
+	@Override
+	public int queryUserByName(String username) {
+		Session session = ssf.openSession();
+		String hql = "from User where username like :username";
+		Query query = session.createQuery(hql);
+		query.setString("username", "%"+username+"%");
+		List<User> list = query.list();
+		session.close();
+		return list.size();
+	}
+
+	@Override
+	public int queryUserByMail(String mail) {
+		Session session = ssf.openSession();
+		String hql = "from User where email like :mail";
+		Query query = session.createQuery(hql);
+		query.setString("mail", "%"+mail+"%");
+		List<User> list = query.list();
+		session.close();
+		return list.size();
+	}
+
 }

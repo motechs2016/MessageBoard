@@ -1,5 +1,6 @@
 package com.hack4b.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import com.hack4b.service.UserService;
 import com.hack4b.tools.Tools;
 import com.hack4b.util.MD5Util;
 import com.hack4b.util.Pager;
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -101,7 +103,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 * @return
 	 */
 	public String queryAllUser(){
-		//TODO 分页显示BUG
 		ActionContext context = ActionContext.getContext();
 		int totalRows = userService.getTotalUser();
 		int pageSize = 5;  //每页显示五条数据
@@ -111,8 +112,72 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		page.put("totalPageNum", pager.getTotalPageNum());
 		page.put("isPrevious", pager.isPrevious());
 		page.put("isNext", pager.isNext());
+		page.put("type", "queryAllUser");  //添加页面跳转类型，便于jsp页面动态生成翻页
 		List<User> list = userService.queryUser(currentPage, pageSize);
 		if(list.size()==0||list==null){
+			return "error";
+		}
+		context.put("page", page);
+		context.put("list", list);
+		return "success";
+	}
+	
+	/**
+	 * 按编号查找用户
+	 * @return
+	 */
+	public String queryUserById(){
+		ActionContext context = ActionContext.getContext();
+		List<User> userList = new ArrayList<>();
+		User user1 = userService.queryUserById(user.getId());
+		if(user1==null){
+			context.put("msg", "没有找到该编号的用户");
+			return "error";
+		}
+		userList.add(user1);
+		context.put("list", userList);
+		return "success";
+	}
+	
+	/**
+	 * 按用户名查询
+	 * @return
+	 */
+	public String queryUserByName(){
+		ActionContext context = ActionContext.getContext();
+		int totalRows = userService.queryUserByName(user.getUsername());
+		int pageSize = 5;  //每页显示五条数据
+		Pager pager = new Pager(this.currentPage,pageSize,totalRows);  //计算分页数据
+		Map<String,Object> page = new HashMap<>();
+		page.put("isPrevious", pager.isPrevious());
+		page.put("isNext", pager.isNext());
+		page.put("currentPage", currentPage);
+		page.put("totalPageNum", pager.getTotalPageNum());
+		page.put("type", "queryUserByName");  //添加页面跳转类型，便于jsp页面动态生成翻页
+		List<User> list = userService.queryUserByName(currentPage, pageSize, user.getUsername());
+		if(list==null||list.size()==0){
+			context.put("msg", "未查询到该用户名");
+			return "error";
+		}
+		context.put("page", page);
+		context.put("list", list);
+		return "success";
+	}
+	
+	public String queryUserByMail(){
+		ActionContext context = ActionContext.getContext();
+		int totalRows = userService.queryUserByMail(user.getEmail());
+		int pageSize = 5;  //每页显示五条记录
+		Pager pager = new Pager(currentPage,pageSize,totalRows);
+		Map<String,Object> page = new HashMap<>();
+		page.put("isPrevious", pager.isPrevious());
+		page.put("isNext", pager.isNext());
+		page.put("currentPage", currentPage);
+		page.put("totalPageNum", pager.getTotalPageNum());
+		page.put("type", "queryUserByMail");  //添加页面跳转类型，便于jsp页面动态生成翻页
+		List<User> list = userService.queryUserByMail(currentPage, pageSize, user.getEmail());
+		if(list==null||list.size()==0){
+			context.put("msg", "未查询到该邮箱");
 			return "error";
 		}
 		context.put("page", page);

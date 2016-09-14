@@ -35,7 +35,7 @@ public interface UserDao {
 	public boolean addUser(User user);
 	
 	/**
-	 * 用户信息查询
+	 * 用户信息查询(所有用户)
 	 * @param currentPage 起始页，从第几页开始查询
 	 * @param pageSize  页面的大小（每页显示的数量）
 	 * @return
@@ -47,4 +47,42 @@ public interface UserDao {
 	 * @return
 	 */
 	public int getTotalUser();
+	
+	/**
+	 * 按ID查询用户信息
+	 * @return 如果查询成功，则返回User对象，否则返回null
+	 */
+	public User queryUserById(int id);
+	
+	/**
+	 * 按用户名查询用户信息
+	 * @param currentpage
+	 * @param pageSize
+	 * @param username
+	 * @return
+	 */
+	public List<User> queryUserByName(int currentPage,int pageSize,String username);
+	
+	/**
+	 * 按用户名查询用户数量
+	 * @param username
+	 * @return
+	 */
+	public int queryUserByName(String username);
+	
+	/**
+	 * 按邮箱查询用户信息
+	 * @param currentPage
+	 * @param pageSize
+	 * @param mail
+	 * @return
+	 */
+	public List<User> queryUserByMail(int currentPage,int pageSize,String mail);
+	
+	/**
+	 * 按邮箱查询用户数量
+	 * @param mail
+	 * @return
+	 */
+	public int queryUserByMail(String mail);
 }

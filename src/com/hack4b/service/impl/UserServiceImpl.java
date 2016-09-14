@@ -57,4 +57,28 @@ public class UserServiceImpl implements UserService {
 		return dao.getTotalUser();
 	}
 
+	@Override
+	public User queryUserById(int id) {
+		return dao.queryUserById(id);
+	}
+
+	@Override
+	public List<User> queryUserByName(int currentPage, int pageSize, String username) {
+		return dao.queryUserByName(currentPage, pageSize, username);
+	}
+
+	@Override
+	public List<User> queryUserByMail(int currentPage, int pageSize, String mail) {
+		return dao.queryUserByMail(currentPage, pageSize, mail);
+	}
+
+	@Override
+	public int queryUserByName(String username) {
+		return dao.queryUserByName(username);
+	}
+
+	@Override
+	public int queryUserByMail(String mail) {
+		return dao.queryUserByMail(mail);
+	}
 }

@@ -17,6 +17,19 @@
     <script>
         $().ready(function(){
             $("#queryForm").validate();
+            $("#queryForm select").change(function(){
+            	var type = $(this).val();
+            	if(type=="id"){
+            		$("#queryForm").attr("action","queryUserById.do");
+            		$("#queryInput").attr("name","id");
+            	}else if(type=="name"){
+            		$("#queryForm").attr("action","queryUserByName.do");
+            		$("#queryInput").attr("name","username");
+            	}else if(type=="email"){
+            		$("#queryForm").attr("action","queryUserByMail.do");
+            		$("#queryInput").attr("name","email");
+            	}
+            });
         });
     </script>
 </head>
@@ -25,17 +38,17 @@
     <div id="container">
         <div id="header">
             <img src="../photo/query.png" alt="商品查询">
-            <form class="form-inline" id="queryForm" role="form" action="">
+            <form class="form-inline" id="queryForm" role="form" action="queryUserById.do" method="post">
                 <div class="form-group">
-                    <select class="form-control" id="sel1">
-                    <option>按编号查询</option>
-                    <option>按用户名查询</option>
-                    <option>按邮箱查询</option>
+                    <select class="form-control" id="selectType">
+                    <option value="id">按编号查询</option>
+                    <option value="name">按用户名查询</option>
+                    <option value="email">按邮箱查询</option>
                     </select>
                 </div>
                 &nbsp;-->>&nbsp;
                 <div class="form-group">
-                    <input type="text" required="true" class="form-control" id="inputstream">
+                    <input type="text" required name="id" class="form-control" id="queryInput">
                 </div>
                 <button type="submit" class="btn btn-default">查询</button>
             </form>
@@ -73,17 +86,51 @@
             </table>
         </div>
         <s:set name="page" value="#request.page" />
-        <div id="footer">
-        	<a href="queryUser.do?currentPage=1">首页</a>
-        	<s:if test="#page.isPrevious">
-            <a href="queryUser.do?currentPage=<s:property value="#page.currentPage-1"/>">上一页</a>
-            </s:if>
-            <s:if test="#page.isNext">
-            <a href="queryUser.do?currentPage=<s:property value="#page.currentPage+1"/>">下一页</a>
-         	</s:if>
-            <a href="queryUser.do?currentPage=<s:property value="#page.totalPageNum"/>">尾页</a>
-            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
-        </div>
+        <!-- 根据Action传值的不同，生成不同的分页 -->
+        <s:if test="#page!=null">
+        	<!-- 如果查询类型是直接查询所有用户 -->
+        	<s:if test="#page.type=='queryAllUser'">
+	        <div id="footer">
+	        	<a href="queryAllUser.do?currentPage=1">首页</a>
+	        	<s:if test="#page.isPrevious">
+	            <a href="queryAllUser.do?currentPage=<s:property value="#page.currentPage-1"/>">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryAllUser.do?currentPage=<s:property value="#page.currentPage+1"/>">下一页</a>
+	         	</s:if>
+	            <a href="queryAllUser.do?currentPage=<s:property value="#page.totalPageNum"/>">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+	        </s:if>
+	        <!-- 按用户名查询 -->
+	        <s:elseif test="#page.type=='queryUserByName'">
+	        <div id="footer">
+	        	<a href="queryUserByName.do?currentPage=1">首页</a>
+	        	<s:if test="#page.isPrevious">
+	            <a href="queryUserByName.do?currentPage=<s:property value="#page.currentPage-1"/>">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryUserByName.do?currentPage=<s:property value="#page.currentPage+1"/>">下一页</a>
+	         	</s:if>
+	            <a href="queryUserByName.do?currentPage=<s:property value="#page.totalPageNum"/>">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+	        </s:elseif>
+	        <!-- 按用户邮箱查询 -->
+	        <s:elseif test="#page.type=='queryUserByMail'">
+	        <div id="footer">
+	        	<a href="queryUserByMail.do?currentPage=1">首页</a>
+	        	<s:if test="#page.isPrevious">
+	            <a href="queryUserByMail.do?currentPage=<s:property value="#page.currentPage-1"/>">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryUserByMail.do?currentPage=<s:property value="#page.currentPage+1"/>">下一页</a>
+	         	</s:if>
+	            <a href="queryUserByMail.do?currentPage=<s:property value="#page.totalPageNum"/>">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+	        </s:elseif>
+        </s:if>
     </div>
 </body>
 
