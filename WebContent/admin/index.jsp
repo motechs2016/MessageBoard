@@ -38,7 +38,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="addUser.jsp" target="iframeContent">添加新用户</a></li>
-                        <li><a href="queryUser.html" target="iframeContent">修改已有用户</a></li>
+                        <li><a href="queryUser.do" target="iframeContent">修改已有用户</a></li>
                     </ul>
                 </li>
                 <li><a href="settings.html" target="iframeContent">系统维护</a></li>

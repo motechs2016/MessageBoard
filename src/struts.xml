@@ -17,6 +17,9 @@
 
 	<!-- 用户管理 -->
 	<package name="user" extends="struts-default" namespace="/admin">
+		<global-results>
+			<result name="input">error.jsp</result>
+		</global-results>
 		<action name="login" class="userAction" method="login">
 			<result name="success">index.jsp</result>
 			<result name="error">login.jsp</result>
@@ -27,6 +30,10 @@
 		<action name="addUser" class="userAction" method="addUser">
 			<result name="success">addUser.jsp</result>
 			<result name="error">addUser.jsp</result>
+		</action>
+		<action name="queryUser" class="userAction" method="queryAllUser">
+			<result name="success">queryUser.jsp</result>
+			<result name="error">queryUser.jsp</result>
 		</action>
 	</package>
 	<!-- 工具 -->

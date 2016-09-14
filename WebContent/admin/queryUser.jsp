@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -9,41 +13,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.validate.min.js"></script>
     <script src="../js/messages_zh.min.js"></script>
-    <style type="text/css">
-        #container {
-            height: 100%;
-            width: 1000px;
-            margin-top: 10px;
-        }
-        
-        #header {
-            position: relative;
-            left: 20px;
-            top: 10px;
-        }
-        
-        #header select {
-            width: 200px;
-            float: left;
-        }
-        
-        #header img {
-            float: left;
-            height: 40px;
-            float: left;
-        }
-        
-        #header select {
-            float: left;
-        }
-        
-        #footer {
-            text-align: center;
-        }
-        table td,table th{
-            text-align:center;
-        }
-    </style>
+	 <link rel="stylesheet" href="css/queryuser.css">
     <script>
         $().ready(function(){
             $("#queryForm").validate();
@@ -73,10 +43,12 @@
         <hr>
         <div id="content">
             <!-- 消息提示 -->
+          	<s:if test="#request.msg!=null">
             <div class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
-            </button> 恭喜恭喜，操作成功！
+            </button> <s:property value="#request.msg"/>
             </div>
+            </s:if>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -88,22 +60,29 @@
                     </tr>
                 </thead>
                 <tbody>
+               <s:iterator value="#request.list" var="user">
                     <tr>
-                        <td>1</td>
-                        <td>admin</td>
-                        <td>admin@admin.com</td>
-                        <td>超级管理员</td>
+                        <td><s:property value="#user.id"/></td>
+                        <td><s:property value="#user.username"/></td>
+                        <td><s:property value="#user.email"/></td>
+                        <td><s:property value="#user.role"/></td>
                         <td><a href="modifyUser.html">修改</a>|<a href="">删除</a></td>
                     </tr>
+                </s:iterator>
                 </tbody>
             </table>
         </div>
+        <s:set name="page" value="#request.page" />
         <div id="footer">
-            <a href="">首页</a>
-            <a href="">上一页</a>
-            <a href="">下一页</a>
-            <a href="">尾页</a>
-            <br> 当前第&nbsp;1&nbsp;页, 总共&nbsp;2&nbsp;页
+        	<a href="queryUser.do?currentPage=1">首页</a>
+        	<s:if test="#page.isPrevious">
+            <a href="queryUser.do?currentPage=<s:property value="#page.currentPage-1"/>">上一页</a>
+            </s:if>
+            <s:if test="#page.isNext">
+            <a href="queryUser.do?currentPage=<s:property value="#page.currentPage+1"/>">下一页</a>
+         	</s:if>
+            <a href="queryUser.do?currentPage=<s:property value="#page.totalPageNum"/>">尾页</a>
+            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
         </div>
     </div>
 </body>
