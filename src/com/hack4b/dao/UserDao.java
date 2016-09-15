@@ -55,6 +55,13 @@ public interface UserDao {
 	public User queryUserById(int id);
 	
 	/**
+	 * 按ID删除用户
+	 * @param id
+	 * @return 删除成功返回true，删除失败返回false
+	 */
+	public boolean deleteUserById(int id);
+	
+	/**
 	 * 按用户名查询用户信息
 	 * @param currentpage
 	 * @param pageSize
@@ -85,4 +92,11 @@ public interface UserDao {
 	 * @return
 	 */
 	public int queryUserByMail(String mail);
+	
+	/**
+	 * 修改用户信息
+	 * @param id
+	 * @return 修改成功返回true，失败返回false
+	 */
+	public Boolean modifyUserById(User user);
 }

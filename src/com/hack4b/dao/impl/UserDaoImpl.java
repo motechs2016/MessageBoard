@@ -160,4 +160,25 @@ public class UserDaoImpl implements UserDao {
 		return list.size();
 	}
 
+	@Override
+	public boolean deleteUserById(int id) {
+		Session session = ssf.openSession();
+		session.beginTransaction();
+		User user = (User)session.get(User.class, id);
+		session.delete(user);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
+
+	@Override
+	public Boolean modifyUserById(User user) {
+		Session session = ssf.openSession();
+		session.beginTransaction();
+		session.update(user);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
+
 }

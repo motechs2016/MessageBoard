@@ -134,6 +134,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			context.put("msg", "没有找到该编号的用户");
 			return "error";
 		}
+		context.getSession().put("queryRole", user1.getRole());  //可能是用户信息修改功能查询的信息，将查询的用户角色放入后端session。
 		userList.add(user1);
 		context.put("list", userList);
 		return "success";
@@ -164,6 +165,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "success";
 	}
 	
+	/**
+	 * 按用户邮箱查找用户
+	 * @return
+	 */
 	public String queryUserByMail(){
 		ActionContext context = ActionContext.getContext();
 		int totalRows = userService.queryUserByMail(user.getEmail());
@@ -183,5 +188,36 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		context.put("page", page);
 		context.put("list", list);
 		return "success";
+	}
+	
+	/**
+	 * 按用户ID删除用户
+	 * @return
+	 */
+	public String deleteUserById(){
+		ActionContext context = ActionContext.getContext();
+		Boolean isSuccess = userService.deleteUserById(user.getId());
+		if(isSuccess){
+			context.put("msg", "用户删除成功！");
+			return "success";
+		}
+		context.put("msg", "用户删除失败！不过你可以重试一下。");
+		return "error";
+	}
+	
+	/**
+	 * 修改用户信息
+	 * @return
+	 */
+	public String modifyUserById(){
+		ActionContext context = ActionContext.getContext();
+		String role = (String) context.getSession().get("queryRole");  //为了安全性，用户角色放在session后端。
+		user.setRole(role);
+		boolean isSuccess = userService.modifyUserById(user);
+		if(isSuccess){
+			context.put("msg", "修改成功！");
+			return "success";
+		}
+		return "error";
 	}
 }

@@ -47,6 +47,18 @@
 			<result name="success">queryUser.jsp</result>
 			<result name="error">queryUser.jsp</result>
 		</action>
+		<action name="deleteUserById" class="userAction" method="deleteUserById">
+			<result name="success" type="redirect">queryAllUser.do</result>
+			<result name="error">queryUser.jsp</result>
+		</action>
+		<action name="queryUserForModify" class="userAction" method="queryUserById">
+			<result name="success">modifyUser.jsp</result>
+			<result name="error">modifyUser.jsp</result>
+		</action>
+		<action name="modifyUserById" class="userAction" method="modifyUserById">
+			<result name="success">modifyUser.jsp</result>
+			<result name="error">modifyUser.jsp</result>
+		</action>
 	</package>
 	<!-- 工具 -->
 	<package name="tool" extends="struts-default" namespace="/">

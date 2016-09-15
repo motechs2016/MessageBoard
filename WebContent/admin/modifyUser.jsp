@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -32,37 +35,41 @@
         <h2>用户信息修改</h2>
         <hr>
         <!--提示警告-->
+        <c:if test="${requestScope.msg!=null }">
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert"
                     aria-hidden="true">
                 &times;
             </button>
-            修改成功了！你可以继续添加，或<a href="">查看你的修改</a>
+            修改成功了！你可以继续添加，或<a href="queryAllUser.do">查看你的修改</a>
         </div>
-        <form class="form-horizontal" id="modifyForm" role="form" method="POST" action="">
+        </c:if>
+        <!-- 保存集合变量方便取值 -->
+        <c:set value="${requestScope.list[0] }" var="user"></c:set>
+        <form class="form-horizontal" id="modifyForm" role="form" method="POST" action="modifyUserById.do">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">用户编号:</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">1</p>
-                    <input type="hidden" value="">
+                    <p class="form-control-static">${user.id }</p>
+                    <input type="hidden" value="${user.id }">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsName">用户名:</label>
                 <div class="col-sm-10">
-                    <input type="text" required class="form-control" placeholder="在此输入用户名称">
+                    <input type="text" required name="username" value="${user.username }" class="form-control" placeholder="在此输入用户名称">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsPrice">联系邮箱:</label>
                 <div class="col-sm-10">
-                    <input type="email" required email class="form-control" placeholder="在此输入联系邮箱">
+                    <input type="email" required email name="email" value="${user.email }" class="form-control" placeholder="在此输入联系邮箱">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="goodsDiscount">用户密码:</label>
                 <div class="col-sm-10">
-                    <input type="text" required class="form-control" placeholder="在此输入用户密码">
+                    <input type="text" required name="password" class="form-control" placeholder="在此输入用户密码">
                 </div>
             </div>
             <div class="form-group">

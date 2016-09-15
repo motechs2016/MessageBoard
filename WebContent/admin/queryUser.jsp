@@ -79,7 +79,7 @@
                         <td><s:property value="#user.username"/></td>
                         <td><s:property value="#user.email"/></td>
                         <td><s:property value="#user.role"/></td>
-                        <td><a href="modifyUser.html">修改</a>|<a href="">删除</a></td>
+                        <td><a href="queryUserForModify.do?id=<s:property value="#user.id"/>">修改</a>|<a href="deleteUserById.do?id=<s:property value="#user.id"/>">删除</a></td>
                     </tr>
                 </s:iterator>
                 </tbody>

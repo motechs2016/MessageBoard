@@ -81,4 +81,18 @@ public class UserServiceImpl implements UserService {
 	public int queryUserByMail(String mail) {
 		return dao.queryUserByMail(mail);
 	}
+
+	@Override
+	public boolean deleteUserById(int id) {
+		return dao.deleteUserById(id);
+	}
+
+	@Override
+	public Boolean modifyUserById(User user) {
+		SecurityCode scd = new SecurityCode();
+		String salt = scd.getSecurityCode(6, SecurityCodeLevel.Hard, false);  //生成六位高难度不重复的盐值
+		user.setSalt(salt);
+		String password = MD5Util.getMd5(user.getPassword()+salt);
+		return dao.modifyUserById(user);
+	}
 }
