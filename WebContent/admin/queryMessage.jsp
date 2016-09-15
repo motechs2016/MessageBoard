@@ -16,6 +16,19 @@
     <script>
         $().ready(function(){
             $("#queryForm").validate();
+            $("#queryForm select").change(function(){
+            	var type = $(this).val();
+            	if(type=="username"){
+            		$("#queryForm").attr("action","queryMsgByUserName.do");
+            		$("#queryInput").attr("name","username");
+            	}else if(type=="email"){
+            		$("#queryForm").attr("action","queryMsgByMail.do");
+            		$("#queryInput").attr("name","email");
+            	}else if(type=="content"){
+            		$("#queryForm").attr("action","queryMsgByContent.do");
+            		$("#queryInput").attr("name","content");
+            	}
+            });
         });
     </script>
 </head>
@@ -24,17 +37,17 @@
     <div id="container">
         <div id="header">
             <img src="../photo/query.png" alt="商品查询">
-            <form class="form-inline" id="queryForm" role="form" action="">
+            <form class="form-inline" id="queryForm" role="form" action="queryMsgByUserName.do">
                 <div class="form-group">
-                    <select class="form-control" id="sel1">
-                    <option>按用户名查询</option>
-                    <option>按邮箱查询</option>
-                    <option>按正文内容查询</option>
+                    <select class="form-control" id="queryType">
+                    <option value="username">按用户名查询</option>
+                    <option value="email">按邮箱查询</option>
+                    <option value="content">按正文内容查询</option>
                     </select>
                 </div>
                 &nbsp;-->>&nbsp;
                 <div class="form-group">
-                    <input type="text" required class="form-control" id="inputstream">
+                    <input type="text" name="username" required class="form-control" id="queryInput">
                 </div>
                 <button type="submit" class="btn btn-default">查询</button>
             </form>
@@ -89,7 +102,46 @@
 	            <a href="queryAllMsg.do?currentPage=<s:property value="#page.totalPageNum" />">尾页</a>
 	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
 	        </div>
-        </s:if>
+        	</s:if>
+        	<s:elseif test="#page.type=='queryMsgByUserName'">
+        	<div id="footer">
+	            <a href='queryMsgByUserName.do?currentPage=1'>首页</a>
+	            <s:if test="#page.isPrevious">
+	            <a href="queryMsgByUserName.do?currentPage=<s:property value="#page.currentPage-1" />">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryMsgByUserName.do?currentPage=<s:property value="#page.currentPage+1" />">下一页</a>
+	            </s:if>
+	            <a href="queryMsgByUserName.do?currentPage=<s:property value="#page.totalPageNum" />">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+        	</s:elseif>
+        	<s:elseif test="#page.type=='queryMsgByMail'">
+        	<div id="footer">
+	            <a href='queryMsgByMail.do?currentPage=1'>首页</a>
+	            <s:if test="#page.isPrevious">
+	            <a href="queryMsgByMail.do?currentPage=<s:property value="#page.currentPage-1" />">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryMsgByMail.do?currentPage=<s:property value="#page.currentPage+1" />">下一页</a>
+	            </s:if>
+	            <a href="queryMsgByMail.do?currentPage=<s:property value="#page.totalPageNum" />">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+        	</s:elseif>
+        	<s:elseif test="#page.type=='queryMsgByContent'">
+        	<div id="footer">
+	            <a href='queryMsgByContent.do?currentPage=1'>首页</a>
+	            <s:if test="#page.isPrevious">
+	            <a href="queryMsgByContent.do?currentPage=<s:property value="#page.currentPage-1" />">上一页</a>
+	            </s:if>
+	            <s:if test="#page.isNext">
+	            <a href="queryMsgByContent.do?currentPage=<s:property value="#page.currentPage+1" />">下一页</a>
+	            </s:if>
+	            <a href="queryMsgByContent.do?currentPage=<s:property value="#page.totalPageNum" />">尾页</a>
+	            <br> 当前第&nbsp;<s:property value="#page.currentPage"/>&nbsp;页, 总共&nbsp;<s:property value="#page.totalPageNum"/>&nbsp;页
+	        </div>
+        	</s:elseif>
         </s:if>
     </div>
 </body>

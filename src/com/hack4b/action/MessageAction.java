@@ -100,4 +100,78 @@ public class MessageAction extends ActionSupport implements ModelDriven<Message>
 		context.put("list", list);
 		return "success";
 	}
+		/**
+		 * 按用户名显示留言内容
+		 * @return
+		 */
+	public String getMsgByUserName(){
+		ActionContext context = ActionContext.getContext();
+		int totalRows = messageService.getNumByUserName(message.getUsername());
+		int pageSize = 5;  //每页显示五条记录
+		Pager pager = new Pager(this.currentPage,pageSize,totalRows);
+		Map<String,Object> page = new HashMap<>();
+		page.put("isPrevious", pager.isPrevious());  //是否有上一页
+		page.put("isNext", pager.isNext());  //是否有下一页
+		page.put("currentPage", currentPage);  //当前页
+		page.put("totalPageNum", pager.getTotalPageNum());  //总页数
+		page.put("type", "queryMsgByUserName");  //设置页面显示类型，配合前端jsp页面实现动态action
+		context.put("page", page);
+		List<Message> list = messageService.getMsgByUserName(message.getUsername());
+		if(list.size()==0||list==null){
+			context.put("msg", "没有记录");
+			return "error";
+		}
+		context.put("list", list);
+		return "success";
+	}
+	
+	/**
+	 * 按邮箱查询留言
+	 * @return
+	 */
+	public String getMsgByMail(){
+		ActionContext context = ActionContext.getContext();
+		int totalRows = messageService.getNumByMail(message.getEmail());
+		int pageSize = 5;  //每页显示数量
+		Pager pager = new Pager(this.currentPage,pageSize,totalRows);
+		Map<String,Object> page = new HashMap<>();
+		page.put("isPrevious", pager.isPrevious());  //是否有上一页
+		page.put("isNext", pager.isNext());  //是否有下一页
+		page.put("currentPage", currentPage);  //当前页
+		page.put("totalPageNum", pager.getTotalPageNum());  //总页数
+		page.put("type", "queryMsgByMail");  //设置页面显示类型，配合前端jsp页面实现动态action
+		context.put("page", page);
+		List<Message> list = messageService.getMsgByMail(message.getEmail());
+		if(list.size()==0||list==null){
+			context.put("msg", "没有记录");
+			return "error";
+		}
+		context.put("list", list);
+		return "success";
+	}
+	
+	/**
+	 * 按内容查询留言
+	 * @return
+	 */
+	public String getMsgByContent(){
+		ActionContext context = ActionContext.getContext();
+		int totalRows = messageService.getNumByContent(message.getContent());
+		int pageSize = 5;  //每页显示的记录数
+		Pager pager = new Pager(this.currentPage,pageSize,totalRows);
+		Map<String,Object> page = new HashMap<>();
+		page.put("isPrevious", pager.isPrevious());  //是否有上一页
+		page.put("isNext", pager.isNext());  //是否有下一页
+		page.put("currentPage", currentPage);  //当前页
+		page.put("totalPageNum", pager.getTotalPageNum());  //总页数
+		page.put("type", "queryMsgByContent");  //设置页面显示类型，配合前端jsp页面实现动态action
+		context.put("page", page);
+		List<Message> list = messageService.getMsgByContent(message.getContent());
+		if(list.size()==0||list==null){
+			context.put("msg", "没有记录");
+			return "error";
+		}
+		context.put("list", list);
+		return "success";
+	}
 }

@@ -32,11 +32,49 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getAllMessage(int currentPage, int pageSize) {
 		List<Message> list = dao.getAllMessage(currentPage, pageSize);
+		return processContent(list, 35);
+	}
+
+	@Override
+	public int getNumByUserName(String username) {
+		return dao.getNumByUserName(username);
+	}
+
+	@Override
+	public List<Message> getMsgByUserName(String username) {
+		List<Message> list = dao.getMsgByUserName(username);
+		return processContent(list, 35);
+	}
+
+	@Override
+	public int getNumByMail(String email) {
+		return dao.getNumByMail(email);
+	}
+
+	@Override
+	public List<Message> getMsgByMail(String email) {
+		List<Message> list = dao.getMsgByMail(email);
+		return processContent(list, 35);
+	}
+
+	@Override
+	public int getNumByContent(String content) {
+		return dao.getNumByContent(content);
+	}
+
+	@Override
+	public List<Message> getMsgByContent(String content) {
+		List<Message> list = dao.getMsgByContent(content);
+		return processContent(list, 35);
+	}
+
+	@Override
+	public List<Message> processContent(List<Message> list, int n) {
 		Iterator<Message> itr = list.iterator();
-		while(itr.hasNext()){  //遍历结果集截取正文内容
+		while(itr.hasNext()){
 			Message msg = itr.next();
-			if(msg.getContent().length()>35){
-				String content = msg.getContent().substring(0, 35);
+			if(msg.getContent().length()>n){
+				String content = msg.getContent().substring(0, n);
 				msg.setContent(content);
 			}
 		}

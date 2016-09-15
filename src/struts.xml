@@ -73,6 +73,18 @@
 			<result name="success">queryMessage.jsp</result>
 			<result name="error">queryMessage.jsp</result>
 		</action>
+		<action name="queryMsgByUserName" class="messageAction" method="getMsgByUserName">
+			<result name="success">queryMessage.jsp</result>
+			<result name="error">queryMessage.jsp</result>
+		</action>
+		<action name="queryMsgByMail" class="messageAction" method="getMsgByMail">
+			<result name="success">queryMessage.jsp</result>
+			<result name="error">queryMessage.jsp</result>
+		</action>
+		<action name="queryMsgByContent" class="messageAction" method="getMsgByContent">
+			<result name="success">queryMessage.jsp</result>
+			<result name="error">queryMessage.jsp</result>
+		</action>
 	</package>
 	<!-- 工具 -->
 	<package name="tool" extends="struts-default" namespace="/">

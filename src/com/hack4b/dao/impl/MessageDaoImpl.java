@@ -53,4 +53,70 @@ public class MessageDaoImpl implements MessageDao {
 		return list;
 	}
 
+	@Override
+	public int getNumByUserName(String username) {
+		Session session = ssf.openSession();
+		String hql = "from Message where username like :username";
+		Query query = session.createQuery(hql);
+		query.setString("username", "%"+username+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list.size();
+	}
+
+	@Override
+	public List<Message> getMsgByUserName(String username) {
+		Session session = ssf.openSession();
+		String hql = "from Message where username like :username";
+		Query query = session.createQuery(hql);
+		query.setString("username", "%"+username+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list;
+	}
+
+	@Override
+	public int getNumByMail(String email) {
+		Session session = ssf.openSession();
+		String hql = "from Message where email like :email";
+		Query query = session.createQuery(hql);
+		query.setString("email", "%"+email+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list.size();
+	}
+
+	@Override
+	public List<Message> getMsgByMail(String email) {
+		Session session = ssf.openSession();
+		String hql = "from Message where email like :email";
+		Query query = session.createQuery(hql);
+		query.setString("email", "%"+email+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list;
+	}
+
+	@Override
+	public int getNumByContent(String content) {
+		Session session = ssf.openSession();
+		String hql = "from Message where content like :content";
+		Query query = session.createQuery(hql);
+		query.setString("content", "%"+content+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list.size();
+	}
+
+	@Override
+	public List<Message> getMsgByContent(String content) {
+		Session session = ssf.openSession();
+		String hql = "from Message where content like :content";
+		Query query = session.createQuery(hql);
+		query.setString("content", "%"+content+"%");
+		List<Message> list = query.list();
+		session.close();
+		return list;
+	}
+
 }
