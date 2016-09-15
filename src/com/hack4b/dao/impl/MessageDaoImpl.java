@@ -1,5 +1,8 @@
 package com.hack4b.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -26,6 +29,28 @@ public class MessageDaoImpl implements MessageDao {
 		session.getTransaction().commit();
 		session.close();
 		return true;
+	}
+
+	@Override
+	public int getNumForMsg() {
+		Session session = ssf.openSession();
+		String hql = "from Message";
+		Query query = session.createQuery(hql);
+		List<Message> list = query.list();
+		session.close();
+		return list.size();
+	}
+
+	@Override
+	public List<Message> getAllMessage(int currentPage, int pageSize) {
+		Session session = ssf.openSession();
+		String hql = "from Message";
+		Query query = session.createQuery(hql);
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		List<Message> list = query.list();
+		session.close();
+		return list;
 	}
 
 }

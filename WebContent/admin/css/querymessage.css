@@ -1,0 +1,33 @@
+#container {
+    height: 100%;
+    width: 1000px;
+    margin-top: 10px;
+}
+
+#header {
+    position: relative;
+    left: 20px;
+    top: 10px;
+}
+
+#header select {
+    width: 200px;
+    float: left;
+}
+
+#header img {
+    float: left;
+    height: 40px;
+    float: left;
+}
+
+#header select {
+    float: left;
+}
+
+#footer {
+    text-align: center;
+}
+table td,table th{
+    text-align:center;
+}

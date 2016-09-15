@@ -62,9 +62,16 @@
 	</package>
 	<!-- 留言管理 -->
 	<package name="message" extends="struts-default" namespace="/admin">
+		<global-results>
+			<result name="input">error.jsp</result>
+		</global-results>
 		<action name="addMsgForAdmin" class="messageAction" method="addMsgForAdmin">
 			<result name="success">addMessage.jsp</result>
 			<result name="error">addMessage.jsp</result>
+		</action>
+		<action name="queryAllMsg" class="messageAction" method="queryAllMsg">
+			<result name="success">queryMessage.jsp</result>
+			<result name="error">queryMessage.jsp</result>
 		</action>
 	</package>
 	<!-- 工具 -->
