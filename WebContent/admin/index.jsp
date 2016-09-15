@@ -30,7 +30,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">留言管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="addMessages.html" target="iframeContent">添加新留言</a></li>
+                        <li><a href="addMessage.jsp" target="iframeContent">添加新留言</a></li>
                         <li><a href="queryMessages.html" target="iframeContent">修改已有留言</a></li>
                     </ul>
                 </li>

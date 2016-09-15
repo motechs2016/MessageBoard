@@ -11,6 +11,9 @@ public class Message implements java.io.Serializable {
 	private String email;
 	private String content;
 	private Boolean isAdmin;
+	
+	//附加
+	private String authCode;
 
 	public Message() {
 	}
@@ -62,4 +65,11 @@ public class Message implements java.io.Serializable {
 		this.isAdmin = isAdmin;
 	}
 
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
 }

@@ -60,6 +60,13 @@
 			<result name="error">modifyUser.jsp</result>
 		</action>
 	</package>
+	<!-- 留言管理 -->
+	<package name="message" extends="struts-default" namespace="/admin">
+		<action name="addMsgForAdmin" class="messageAction" method="addMsgForAdmin">
+			<result name="success">addMessage.jsp</result>
+			<result name="error">addMessage.jsp</result>
+		</action>
+	</package>
 	<!-- 工具 -->
 	<package name="tool" extends="struts-default" namespace="/">
 		<action name="authCode" class="toolAction" method="authCode">

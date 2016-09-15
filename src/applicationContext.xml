@@ -41,6 +41,7 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- 业务逻辑配置 -->
+	<!-- 用户管理 -->
 	<bean id="userDao" class="com.hack4b.dao.impl.UserDaoImpl">
 		<property name="ssf" ref="sessionFactory"></property>
 	</bean>
@@ -50,6 +51,16 @@
 	<bean id="userAction" class="com.hack4b.action.UserAction">
 		<property name="userService" ref="userService"></property>
 	</bean>
-	
+	<!-- 留言管理 -->
+	<bean id="messageDao" class="com.hack4b.dao.impl.MessageDaoImpl">
+		<property name="ssf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="messageService" class="com.hack4b.service.impl.MessageServiceImpl">
+		<property name="dao" ref="messageDao"></property>
+	</bean>
+	<bean id="messageAction" class="com.hack4b.action.MessageAction">
+		<property name="messageService" ref="messageService"></property>
+	</bean>
+	<!-- 工具相关 -->
 	<bean id="toolAction" class="com.hack4b.action.ToolAction"></bean>
 </beans>
