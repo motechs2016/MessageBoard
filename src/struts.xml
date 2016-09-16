@@ -15,6 +15,7 @@
 	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
 	<constant name="struts.devMode" value="true"></constant>
 
+	
 	<!-- 用户管理 -->
 	<package name="user" extends="struts-default" namespace="/admin">
 		<global-results>
@@ -98,8 +99,25 @@
 			<result name="error">queryMessage.jsp</result>
 		</action>
 	</package>
+	<!-- 网站配置管理（系统维护） -->
+	<package name="settings" extends="struts-default" namespace="/admin">
+		<global-results>
+			<result name="input">error.jsp</result>
+		</global-results>
+		<action name="midifySettings" class="settingsAction" method="midifySettings">
+			<result name="success">settings.jsp</result>
+			<result name="error">settings.jsp</result>
+		</action>
+		<action name="getSettings" class="settingsAction" method="getSettings">
+			<result name="success">settings.jsp</result>
+			<result name="error">settings.jsp</result>
+		</action>
+	</package>
 	<!-- 工具 -->
 	<package name="tool" extends="struts-default" namespace="/">
+		<global-results>
+			<result name="input">error.jsp</result>
+		</global-results>
 		<action name="authCode" class="toolAction" method="authCode">
 			<result name="success" type="stream">
 				<param name="contentType">image/jpeg</param>

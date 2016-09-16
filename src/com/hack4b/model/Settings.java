@@ -6,35 +6,26 @@ package com.hack4b.model;
  */
 public class Settings implements java.io.Serializable {
 
-	private String key;
+	private int id;
+	private String config;
 	private String value;
-
-	public Settings() {
+	public int getId() {
+		return id;
 	}
-
-	public Settings(String key) {
-		this.key = key;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public Settings(String key, String value) {
-		this.key = key;
-		this.value = value;
+	public String getConfig() {
+		return config;
 	}
-
-	public String getKey() {
-		return this.key;
+	public void setConfig(String config) {
+		this.config = config;
 	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
 	public String getValue() {
-		return this.value;
+		return value;
 	}
-
 	public void setValue(String value) {
 		this.value = value;
 	}
-
+	
 }

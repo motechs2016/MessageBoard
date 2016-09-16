@@ -61,6 +61,17 @@
 	<bean id="messageAction" class="com.hack4b.action.MessageAction">
 		<property name="messageService" ref="messageService"></property>
 	</bean>
+	<!-- 系统维护管理 -->
+	<bean id="settingsDao" class="com.hack4b.dao.impl.SettingsDaoImpl">
+		<property name="ssf" ref="sessionFactory"></property>
+	</bean>
+	<bean id="settingsService" class="com.hack4b.service.impl.SettingsServiceImpl">
+		<property name="dao" ref="settingsDao"></property>
+	</bean>
+	<bean id="settingsAction" class="com.hack4b.action.SettingsAction">
+		<property name="settingsService" ref="settingsService"></property>
+	</bean>
 	<!-- 工具相关 -->
 	<bean id="toolAction" class="com.hack4b.action.ToolAction"></bean>
+	<bean id="springUtil" class="com.hack4b.util.SpringUtil"></bean>
 </beans>
