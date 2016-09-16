@@ -41,7 +41,7 @@
                     aria-hidden="true">
                 &times;
             </button>
-            修改成功了！你可以继续添加，或<a href="queryAllUser.do">查看你的修改</a>
+            修改成功了！你可以<a href="queryAllUser.do">查看你的修改</a>
         </div>
         </c:if>
         <!-- 保存集合变量方便取值 -->

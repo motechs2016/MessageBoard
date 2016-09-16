@@ -75,4 +75,25 @@ public interface MessageService {
 	 * @return
 	 */
 	public List<Message> getMsgByContent(String content);
+	
+	/**
+	 * 根据ID查询用户信息
+	 * @param id
+	 * @return
+	 */
+	public Message getMsgById(int id);
+	
+	/**
+	 * 修改留言信息
+	 * @param msg
+	 * @return
+	 */
+	public boolean modifyMsg(Message msg);
+	
+	/**
+	 * 删除留言
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteMsg(int id);
 }

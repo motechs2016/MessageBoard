@@ -80,7 +80,7 @@
                         <td><s:property value="#msg.email" /></td>
                         <td><s:if test="#msg.isAdmin==true">是</s:if><s:else>否</s:else></td>
                         <td><s:property value="#msg.content" />...</td>
-                        <td><a href="modifyMessages.html">修改</a>|<a href="">删除</a></td>
+                        <td><a href="queryMsgById.do?id=<s:property value="#msg.id" />">修改</a>|<a href="deleteMsg.do?id=<s:property value="#msg.id" />">删除</a></td>
                     </tr>
                     </s:iterator>
                 </tbody>

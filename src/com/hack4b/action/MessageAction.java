@@ -174,4 +174,48 @@ public class MessageAction extends ActionSupport implements ModelDriven<Message>
 		context.put("list", list);
 		return "success";
 	}
+	
+	/**
+	 * 根据ID查找留言
+	 * @return
+	 */
+	public String getMsgById(){
+		ActionContext context = ActionContext.getContext();
+		Message msg = messageService.getMsgById(message.getId());
+		if(msg==null){
+			context.put("msg", "没有记录！");
+			return "error";
+		}
+		context.put("msg", msg);
+		return "success";
+	}
+	
+	/**
+	 * 修改留言信息
+	 * @return
+	 */
+	public String modifyMsg(){
+		ActionContext context = ActionContext.getContext();
+		boolean isSuccess = messageService.modifyMsg(message);
+		if(isSuccess){
+			return "success";
+		}
+		context.put("msg", "修改失败，请重试！");
+		return "error";
+	}
+	
+	/**
+	 * 删除留言
+	 * @return
+	 */
+	public String deleteMsg(){
+		ActionContext context = ActionContext.getContext();
+		boolean isSuccess = false;
+		isSuccess = messageService.deleteMsg(message.getId());
+		if(isSuccess){
+			return "success";
+		}
+		context.put("msg", "删除失败！");
+		return "error";
+	}
 }

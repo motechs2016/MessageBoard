@@ -85,6 +85,18 @@
 			<result name="success">queryMessage.jsp</result>
 			<result name="error">queryMessage.jsp</result>
 		</action>
+		<action name="queryMsgById" class="messageAction" method="getMsgById">
+			<result name="success">modifyMessage.jsp</result>
+			<result name="error">queryMessage.jsp</result>
+		</action>
+		<action name="modifyMsg" class="messageAction" method="modifyMsg">
+			<result name="success" type="redirect">queryAllMsg.do</result>
+			<result name="error" type="redirect">queryMessage.jsp</result>
+		</action>
+		<action name="deleteMsg" class="messageAction" method="deleteMsg">
+			<result name="success" type="redirect">queryAllMsg.do</result>
+			<result name="error">queryMessage.jsp</result>
+		</action>
 	</package>
 	<!-- 工具 -->
 	<package name="tool" extends="struts-default" namespace="/">

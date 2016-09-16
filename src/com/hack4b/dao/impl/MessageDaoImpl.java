@@ -119,4 +119,33 @@ public class MessageDaoImpl implements MessageDao {
 		return list;
 	}
 
+	@Override
+	public Message getMsgById(int id) {
+		Session session = ssf.openSession();
+		Message msg = (Message) session.get(Message.class, id);
+		session.close();
+		return msg;
+	}
+
+	@Override
+	public boolean modifyMsg(Message msg) {
+		Session session = ssf.openSession();
+		session.beginTransaction();
+		session.update(msg);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
+
+	@Override
+	public boolean deleteMsg(int id) {
+		Session session = ssf.openSession();
+		session.beginTransaction();
+		Message msg = (Message) session.get(Message.class, id);
+		session.delete(msg);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
+
 }

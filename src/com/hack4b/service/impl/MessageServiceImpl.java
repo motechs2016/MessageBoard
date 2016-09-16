@@ -81,4 +81,19 @@ public class MessageServiceImpl implements MessageService {
 		return list;
 	}
 
+	@Override
+	public Message getMsgById(int id) {
+		return dao.getMsgById(id);
+	}
+
+	@Override
+	public boolean modifyMsg(Message msg) {
+		return dao.modifyMsg(msg);
+	}
+
+	@Override
+	public boolean deleteMsg(int id) {
+		return dao.deleteMsg(id);
+	}
+
 }
