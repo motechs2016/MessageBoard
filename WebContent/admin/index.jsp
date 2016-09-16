@@ -41,7 +41,7 @@
                         <li><a href="queryAllUser.do" target="iframeContent">修改已有用户</a></li>
                     </ul>
                 </li>
-                <li><a href="settings.html" target="iframeContent">系统维护</a></li>
+                <li><a href="getSettings.do" target="iframeContent">系统维护</a></li>
                 <li><a href="help.html" target="iframeContent">使用帮助</a></li>
             </ul>
         </div>

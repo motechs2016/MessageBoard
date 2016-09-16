@@ -43,6 +43,7 @@
             ${msg }
         </div>
         </c:if>
+        <c:if test="${isModify!=false }">
         <form class="form-horizontal" id="modifyForm" role="form" method="POST" action="midifySettings.do">
             <div class="form-group">
                 <label class="control-label col-sm-2">网站标题：</label>
@@ -92,6 +93,7 @@
                 </div>
             </div>
         </form>
+        </c:if>
     </div>
 </body>
 

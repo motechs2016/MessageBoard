@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -21,16 +25,17 @@
 </head>
 
 <body>
+	<s:action name="indexSettings" namespace="/admin"></s:action>
     <div class="container">
         <!--header-->
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#">首页</a>
+                        <a href="index.jsp">首页</a>
                     </li>
                     <li>
-                        <a href="admin/login.html">后台</a>
+                        <a href="admin/login.jsp">后台</a>
                     </li>
                     <li>
                         <a href="#">关于</a>
@@ -38,10 +43,10 @@
                 </ul>
                 <div class="jumbotron">
                     <h1>
-                        老王的留言板
+                       ${map.Title1 }
                     </h1>
                     <p>
-                        一段说明性文字。。。
+                        <s:property value="#map.Title2"/>
                     </p>
                     <p>
                         <a class="btn btn-primary btn-large" href="#addMsgForm">单击留言</a>

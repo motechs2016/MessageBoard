@@ -2,6 +2,7 @@ package com.hack4b.action;
 
 import java.util.Map;
 
+import com.hack4b.model.User;
 import com.hack4b.service.SettingsService;
 import com.hack4b.util.SettingsUtil;
 import com.opensymphony.xwork2.ActionContext;
@@ -72,6 +73,13 @@ public class SettingsAction extends ActionSupport {
 	 */
 	public String midifySettings(){
 		ActionContext context = ActionContext.getContext();
+		User user = (User)context.getSession().get("user");  //获取用户角色
+		String role = user.getRole();
+		if(!role.equals("超级管理员")){  //如果用户角色不是超级管理员
+			context.put("msg", "抱歉，你所在的用户角色无法更改该设置！");
+			context.put("isModify", false);
+			return "error";
+		}
 		try {
 			settingsService.modifySettings("WebTitle", webtitle);
 			settingsService.modifySettings("Title1", title1);
