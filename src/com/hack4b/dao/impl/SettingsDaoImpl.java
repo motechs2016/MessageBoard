@@ -21,7 +21,7 @@ public class SettingsDaoImpl implements SettingsDao {
 	@Override
 	public Settings getSettingsByName(String name) {
 		Session session = ssf.openSession();
-		String hql = "from Settings where key like :key";
+		String hql = "from Settings where config like :key";
 		Query query = session.createQuery(hql);
 		query.setString("key", name);
 		query.setMaxResults(1);
