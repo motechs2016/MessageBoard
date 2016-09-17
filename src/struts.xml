@@ -112,9 +112,7 @@
 			<result name="success">settings.jsp</result>
 			<result name="error">settings.jsp</result>
 		</action>
-		<action name="indexSettings" class="settingsAction" method="getSettings">
-			<result name="success">../index.jsp</result>
-			<result name="error">../index.jsp</result>
+		<action name="indexSettings" class="settingsAction" method="getSettingsForJson">
 		</action>
 	</package>
 	<!-- 工具 -->

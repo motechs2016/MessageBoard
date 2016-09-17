@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <meta charset="UTF-8">
-    <title>留言板</title>
+    <title id="webtitle">留言板</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -20,12 +18,12 @@
             $("#authCodeImg").click(function(){  
           		$(this).attr("src","authCode.do?timestamp="+new Date().getTime());  
          	 }); 
+            $("#aboutme").click(function(){alert("这只是一个DEMO～如果你有意见，直接留言哦～～");});
         });
     </script>
 </head>
 
 <body>
-	<s:action name="indexSettings" namespace="/admin"></s:action>
     <div class="container">
         <!--header-->
         <div class="row clearfix">
@@ -38,18 +36,18 @@
                         <a href="admin/login.jsp">后台</a>
                     </li>
                     <li>
-                        <a href="#">关于</a>
+                        <a href="#" id="aboutme">关于</a>
                     </li>
                 </ul>
                 <div class="jumbotron">
-                    <h1>
-                       ${map.Title1 }
+                    <h1 id="title1">
+                       首页一级标题
                     </h1>
-                    <p>
-                        <s:property value="#map.Title2"/>
+                    <p id="title2">
+                       首页二级标题
                     </p>
                     <p>
-                        <a class="btn btn-primary btn-large" href="#addMsgForm">单击留言</a>
+                        <a class="btn btn-primary btn-large" href="#addMsgForm" id="webbutton">首页按钮</a>
                     </p>
                 </div>
             </div>
@@ -127,13 +125,35 @@
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <blockquote>
-                    <p>
-                        PowerBy:onice
-                    </p> <small>在温室中想象南极。</cite></small>
+                    <p id="copyright1">
+                        首页一级版权
+                    </p> <small id="copyright2">首页二级版权</cite></small>
                 </blockquote>
             </div>
         </div>
     </div>
 </body>
-
+<script>
+	var xmlhttp;
+	if (window.XMLHttpRequest){
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}else{
+		// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.open("GET","<%=request.getContextPath() %>/admin/indexSettings.do",true);
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function(){
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+	         var settings = JSON.parse(xmlhttp.responseText);
+	         document.getElementById("webtitle").innerText = settings.WebTitle;
+	         document.getElementById("title1").innerText = settings.Title1;
+	         document.getElementById("title2").innerText = settings.Title2;
+	         document.getElementById("webbutton").innerText = settings.WebButton;
+	         document.getElementById("copyright1").innerText = settings.Copyright1;
+	         document.getElementById("copyright2").innerText = settings.Copyright2;
+	    }
+	}
+</script>
 </html>

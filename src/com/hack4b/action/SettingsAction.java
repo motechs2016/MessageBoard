@@ -1,7 +1,14 @@
 package com.hack4b.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.google.gson.JsonObject;
 import com.hack4b.model.User;
 import com.hack4b.service.SettingsService;
 import com.hack4b.util.SettingsUtil;
@@ -103,6 +110,13 @@ public class SettingsAction extends ActionSupport {
 	 */
 	public String getSettings(){
 		ActionContext context = ActionContext.getContext();
+		User user = (User)context.getSession().get("user");  //获取用户角色
+	    String role = user.getRole();
+		if(!role.equals("超级管理员")||role == null||role.equals("")){  //如果用户角色不是超级管理员
+			context.put("msg", "抱歉，你所在的用户角色无法更改该设置！");
+			context.put("isModify", false);
+			return "error";
+		}
 		Map<String,String> map = SettingsUtil.getInstance().getSettings();
 		if(map.size()==0||map==null){
 			context.put("msg", "获取配置失败！");
@@ -110,5 +124,30 @@ public class SettingsAction extends ActionSupport {
 		}
 		context.put("map", map);
 		return "success";
+	}
+	
+	/**
+	 * 获取网站配置信息并返回json数据格式
+	 * @return
+	 * @throws IOException 
+	 */
+	public void getSettingsForJson() throws IOException{
+		HttpServletResponse resp = ServletActionContext.getResponse();
+		resp.setHeader("Content-Type", "application/json;charset=utf-8");
+		resp.setHeader("Access-Control-Allow-Origin", "*");  //允许跨域访问
+		Map<String,String> map = SettingsUtil.getInstance().getSettings();
+		JsonObject jobj = new JsonObject();
+		jobj.addProperty("WebTitle", map.get("WebTitle"));
+		jobj.addProperty("Title1", map.get("Title1"));
+		jobj.addProperty("Title2", map.get("Title2"));
+		jobj.addProperty("WebButton", map.get("WebButton"));
+		jobj.addProperty("MsgNumber", map.get("MsgNumber"));
+		jobj.addProperty("Copyright1", map.get("Copyright1"));
+		jobj.addProperty("Copyright2", map.get("Copyright2"));
+		String result = jobj.toString();
+		PrintWriter pw = resp.getWriter();
+		pw.print(result);
+		pw.flush();
+		pw.close();
 	}
 }
