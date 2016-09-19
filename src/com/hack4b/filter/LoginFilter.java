@@ -21,25 +21,23 @@ import com.sun.net.httpserver.Filter.Chain;
  * @author lejie
  *
  */
-//@WebFilter("/admin/*")
+@WebFilter("/admin/*")
 public class LoginFilter implements Filter {
 
 	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest)arg0;
-		HttpServletResponse resp = (HttpServletResponse)arg1;
-		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
-		if(user==null){  //如果用户没有登录
-			resp.sendRedirect("admin/login.jsp");
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse resp = (HttpServletResponse)response;
+		String uri = req.getRequestURI();
+		if(!uri.contains("login.jsp")){  //白名单
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("user");
+			if(user==null){  //用户没有登录
+				resp.sendRedirect("login.jsp");
+			}
 		}
-		String uri = req.getRequestURI();  //获取请求路径
-		if(uri.contains("login.jsp")){
-			arg2.doFilter(req, resp);
-		}
-		
-		arg2.doFilter(req, resp);
+		chain.doFilter(request, response);
 	}
 	@Override
 	public void destroy() {
