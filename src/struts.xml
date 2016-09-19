@@ -14,7 +14,6 @@
 	<constant name="struts.configuration.xml.reload" value="true"></constant>
 	<!-- 开发模式下使用，这样可以打印出更加详细的错误信息 -->
 	<constant name="struts.devMode" value="true"></constant>
-
 	
 	<!-- 用户管理 -->
 	<package name="user" extends="struts-default" namespace="/admin">
@@ -112,7 +111,21 @@
 			<result name="success">settings.jsp</result>
 			<result name="error">settings.jsp</result>
 		</action>
+	</package>
+	<!-- 网站首页内容请求 -->
+	<package name="index" extends="struts-default" namespace="/">
+		<global-results>
+			<result name="input">admin/error.jsp</result>
+		</global-results>
 		<action name="indexSettings" class="settingsAction" method="getSettingsForJson">
+		</action>
+		<action name="index" class="messageAction" method="queryAllMsg">
+			<result name="success">index.jsp</result>
+			<result name="error">index.jsp</result>
+		</action>
+		<action name="addMsgForIndex" class="messageAction" method="addMsgForVisitor">
+			<result name="success" type="redirect">index.do</result>
+			<result name="error">index.jsp</result>
 		</action>
 	</package>
 	<!-- 工具 -->

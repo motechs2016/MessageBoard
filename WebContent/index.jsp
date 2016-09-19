@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -53,50 +54,68 @@
             </div>
         </div>
         <!-- 消息提示 -->
+        <s:if test="#request.msg!=null">
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
-            </button> 恭喜恭喜，你的留言已提交！
+            </button> <s:property value="#request.msg"/>
         </div>
+        </s:if>
         <!-- 正文显示 -->
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <div class="row clearfix">
-                    <div class="col-md-4 column">
-                        <div style="height:140px;width:140px;margin-top:20px;float:left">
-                            <img alt="140x140" src="photo/touxiang.jpg" class="img-thumbnail" />
-                        </div>
-                        <div style="float:left;margin:20px">
-                            <h4>用户名：王老吉</h4>
-                            <h5>联系邮箱：fuck@fuck.com</h5>
-                        </div>
-                    </div>
-                    <div class="col-md-8 column">
-                        <h2>
-                            于xxxx写下：
-                        </h2>
-                        <p>
-                            黑客是一个中文词语，皆源自英文hacker，随着灰鸽子的出现，灰鸽子成为了很多假借黑客名义控制他人电脑的黑客技术，于是出现了“骇客”与"黑客"分家。2012年电影频道节目中心出品的电影《骇客（Hacker) 》也已经开始使用骇客一词，显示出中文使用习惯的趋同。实际上，黑客（或骇客）与英文原文Hacker、Cracker等含义不能够达到完全对译，这是中英文语言词汇各自发展中形成的差异。Hacker一词，最初曾指热心于计算机技术、水平高超的电脑专家，尤其是程序设计人员，逐渐区分为白帽、灰帽、黑帽等，其中黑帽（black
-                            hat）实际就是cracker。在媒体报道中，黑客一词常指那些软件骇客（software cracker），而与黑客（黑帽子）相对的则是白帽子。
-                        </p>
-                        <p>
-                            <a style="float:right" class="btn" href="#">查看详情 »</a>
-                        </p>
-                    </div>
-                </div>
-                <!-- 分页 -->
-                <div id="pager">
-                    <a href="">首页</a>
-                    <a href="">上一页</a>
-                    <a href="">下一页</a>
-                    <a href="">尾页</a>
-                    <br> 当前第&nbsp;1&nbsp;页, 总共&nbsp;2&nbsp;页
-                </div>
-            </div>
-        </div>
+            	<!-- 插入正文内容 -->
+				<s:iterator value="#request.list" var="msg">
+					<div class="row clearfix">
+						<div class="col-md-4 column">
+							<div
+								style="height: 140px; width: 140px; margin-top: 20px; float: left">
+								<img alt="140x140" src="photo/touxiang.jpg" class="img-thumbnail" />
+							</div>
+							<div style="float: left; margin: 20px">
+								<h4>
+									用户名：
+									<s:property value="#msg.username" />
+								</h4>
+								<h5>
+									联系邮箱：
+									<s:property value="#msg.email" />
+								</h5>
+							</div>
+						</div>
+						<div class="col-md-8 column">
+							<h2>第<s:property value="#msg.id"/>楼：</h2>
+							<p <s:if test="#msg.isAdmin==true">style="color:blue"</s:if>>
+								<s:property value="#msg.content" />
+							</p>
+							<p>
+								<a style="float: right" class="btn" href="#">查看详情 »</a>
+							</p>
+						</div>
+					</div>
+				</s:iterator>
+				<!-- 分页 -->
+				<s:set value="#request.page" var="page"></s:set>
+				<div id="pager">
+					<a href="index.do?currentPage=1">首页</a> 
+					<s:if test="#page.isPrevious">
+					<a href="index.do?currentPage=<s:property value="#page.currentPage-1" />">上一页</a>
+					</s:if>
+					<s:if test="#page.isNext">
+					<a href="index.do?currentPage=<s:property value="#page.currentPage+1" />">下一页</a>
+					</s:if>
+					<a href="index.do?currentPage=<s:property value="#page.totalPageNum" />">尾页</a>
+					<br> 当前第&nbsp;
+					<s:property value="#page.currentPage" />
+					&nbsp;页, 总共&nbsp;
+					<s:property value="#page.totalPageNum" />
+					&nbsp;页
+				</div>
+			</div>
+		</div>
         <!-- 留言 -->
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <form role="form" id="addMsgForm">
+                <form role="form" id="addMsgForm" action="addMsgForIndex.do">
                     <div class="form-group">
                         <label for="name">用户：</label>
                         <input type="text" name="username" required maxlength="8" class="form-control" placeholder="请输入你的名称">
@@ -142,7 +161,7 @@
 		// code for IE6, IE5
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	xmlhttp.open("GET","<%=request.getContextPath() %>/admin/indexSettings.do",true);
+	xmlhttp.open("GET","<%=request.getContextPath() %>/indexSettings.do",true);
 	xmlhttp.send();
 	xmlhttp.onreadystatechange=function(){
 	    if (xmlhttp.readyState==4 && xmlhttp.status==200){

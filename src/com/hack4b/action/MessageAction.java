@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.hack4b.model.Message;
 import com.hack4b.service.MessageService;
 import com.hack4b.util.Pager;
+import com.hack4b.util.SettingsUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -83,7 +88,7 @@ public class MessageAction extends ActionSupport implements ModelDriven<Message>
 	public String queryAllMsg(){
 		ActionContext context = ActionContext.getContext();
 		int totalRows = messageService.getNumForMsg();
-		int pageSize = 5;	//每页显示五条记录
+		int pageSize = Integer.valueOf(SettingsUtil.getInstance().getSettings().get("MsgNumber"));	//每页显示记录
 		Pager pager = new Pager(currentPage,pageSize,totalRows);
 		Map<String,Object> page = new HashMap<>();
 		page.put("isPrevious", pager.isPrevious());  //是否有上一页
@@ -146,8 +151,10 @@ public class MessageAction extends ActionSupport implements ModelDriven<Message>
 			context.put("msg", "没有记录");
 			return "error";
 		}
-		context.put("list", list);
-		return "success";
+//		context.put("list", list);
+		ServletActionContext.getRequest().setAttribute("list", list);
+		return null;
+//		return "success";
 	}
 	
 	/**

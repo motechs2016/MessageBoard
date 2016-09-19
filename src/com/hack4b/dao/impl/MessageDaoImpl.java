@@ -44,7 +44,7 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public List<Message> getAllMessage(int currentPage, int pageSize) {
 		Session session = ssf.openSession();
-		String hql = "from Message";
+		String hql = "from Message order by id desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((currentPage-1)*pageSize);
 		query.setMaxResults(pageSize);
